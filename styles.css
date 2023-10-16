@@ -13,11 +13,11 @@ body{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    height: 7rem;
+    height: 20rem;
 }
 
 .heading{
-    font-size: larger;
+    font-size: 50px;
     font-weight: 700;
     box-shadow: 2px 2px 2px 1px;
     border: 1px solid rgb(135, 134, 134);
@@ -31,9 +31,9 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 25rem;
-    gap: 10px;
-    height: 2rem;
+    width: 63rem;
+    gap: 30px;
+    height: 5rem;
 }
 
 .item{
@@ -41,31 +41,32 @@ body{
     border: 1px solid black;
     height: 100%;
     width: 30%;
-    box-shadow: 1px 1px 1px 1px;
+    box-shadow: 2px 2px 2px 2px;
+    font-size: 40px;
 }
 
 .timer{
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
+    gap:45px;
 }
 
 .text{
-    font-size: xx-large;
-    margin-top: 2%;
+    font-size: 52px;
+    /* margin-top: 2%; */
     border: 2px solid black;
     border-radius:  10px;
-    box-shadow: 1px 1px 1px 1px;
-    padding: 2%;
+    box-shadow: 2px 2px 2px 2px;
+    padding: 1%;
     background-color: #efeff3;
     color: black;
 }
 .timerScreen{
-    font-size: 90px;
+    font-size: 155px;
     border: 2px solid black;
     border-radius:  10px;
-    box-shadow: 1px 1px 1px 1px;
+    box-shadow: 2px 2px 2px 2px;
     padding: 2%;
     background-color: 	#efeff3;
     color: black;
@@ -75,11 +76,11 @@ body{
     width: 20%;
     display: flex;
     justify-content: space-evenly;
-    font-size: 30px;
+    font-size: 56px;
     align-items: center;
     border: 2px solid black;
-    border-radius:  10px;
-    box-shadow: 1px 1px 1px 1px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px;
     padding: 1%;
     background-color: #efeff3;
     color: black;
