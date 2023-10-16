@@ -1,0 +1,116 @@
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:	#5e0404;
+    color: white;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 7rem;
+}
+
+.heading{
+    font-size: larger;
+    font-weight: 700;
+    box-shadow: 2px 2px 2px 1px;
+    border: 1px solid rgb(135, 134, 134);
+    border-radius: 10px;
+    padding: 1%;
+    margin-bottom: 1%;
+    background-color: rgb(58, 1, 1);
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 25rem;
+    gap: 10px;
+    height: 2rem;
+}
+
+.item{
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 100%;
+    width: 30%;
+    box-shadow: 1px 1px 1px 1px;
+}
+
+.timer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text{
+    font-size: xx-large;
+    margin-top: 2%;
+    border: 2px solid black;
+    border-radius:  10px;
+    box-shadow: 1px 1px 1px 1px;
+    padding: 2%;
+    background-color: #efeff3;
+    color: black;
+}
+.timerScreen{
+    font-size: 90px;
+    border: 2px solid black;
+    border-radius:  10px;
+    box-shadow: 1px 1px 1px 1px;
+    padding: 2%;
+    background-color: 	#efeff3;
+    color: black;
+}
+
+.timerButtons{
+    width: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 30px;
+    align-items: center;
+    border: 2px solid black;
+    border-radius:  10px;
+    box-shadow: 1px 1px 1px 1px;
+    padding: 1%;
+    background-color: #efeff3;
+    color: black;
+}
+
+@media screen and (max-width: 600px) {
+    
+    html{
+        height: 100vh;
+    }
+
+    .heading{
+        padding: 2%;
+    }
+    .header{
+        height: 20vh;
+    }
+
+    .timerButtons{
+        width: 50%;
+        height: 3.5rem;
+    }
+
+    .buttons{
+        height: 2.5rem;
+    }
+    .item{
+        width: 20%;
+        height: 100%;
+        font-weight: bold;
+    }
+}
+
+
