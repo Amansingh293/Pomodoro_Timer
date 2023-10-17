@@ -67,7 +67,7 @@ utilsButton.addEventListener("click", (e) => {
     resume = false;
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
-    titleDisplay.textContent = 'Pomodoro Timer';
+    titleDisplay.textContent = 'Short Break';
     return;
   }
 
@@ -85,7 +85,7 @@ utilsButton.addEventListener("click", (e) => {
     fadeFn(element);
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
-    titleDisplay.textContent = 'Pomodoro Timer';
+    titleDisplay.textContent = 'Long Break';
     return;
   }
 });
