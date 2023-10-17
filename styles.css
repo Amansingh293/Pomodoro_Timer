@@ -2,6 +2,9 @@
 *{
     margin: 0;
     box-sizing: border-box;
+    text-align: center;
+    font-weight: bold;
+    /* text-wrap:wrap; */
 }
 
 body{
@@ -14,11 +17,12 @@ body{
     justify-content: space-evenly;
     align-items: center;
     height: 20rem;
+    width: 100%;
 }
 
 .heading{
-    font-size: 50px;
-    font-weight: 700;
+    font-size: 5rem;
+    /* font-weight: 700; */
     box-shadow: 2px 2px 2px 1px;
     border: 1px solid rgb(135, 134, 134);
     border-radius: 10px;
@@ -31,52 +35,53 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 63rem;
-    gap: 30px;
-    height: 5rem;
+    width: 80vw;
+    height: 27%;
 }
 
 .item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 10px;
     border: 1px solid black;
     height: 100%;
-    width: 30%;
+    width: 23%;
     box-shadow: 2px 2px 2px 2px;
-    font-size: 40px;
+    font-size: 2rem;
 }
 
 .timer{
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap:45px;
+    gap: 40px;
 }
 
 .text{
-    font-size: 52px;
-    /* margin-top: 2%; */
+    font-size: 4rem;
     border: 2px solid black;
-    border-radius:  10px;
+    border-radius: 10px;
     box-shadow: 2px 2px 2px 2px;
     padding: 1%;
     background-color: #efeff3;
     color: black;
 }
 .timerScreen{
-    font-size: 155px;
+    font-size: 10rem;
     border: 2px solid black;
-    border-radius:  10px;
+    border-radius: 10px;
     box-shadow: 2px 2px 2px 2px;
     padding: 2%;
-    background-color: 	#efeff3;
+    background-color: #efeff3;
     color: black;
 }
 
 .timerButtons{
-    width: 20%;
-    display: flex;
+    width: 22%;
+    display:flex;
     justify-content: space-evenly;
-    font-size: 56px;
+    font-size: 4rem;
     align-items: center;
     border: 2px solid black;
     border-radius: 10px;
@@ -86,31 +91,106 @@ body{
     color: black;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+
+    .header{
+        height: 20rem;
+        width: 100%;
+    }
+    
+    .heading{
+        font-size: 5rem;
+        padding: 1%;
+        margin-bottom: 1%;
+    }
+    
+    .buttons{
+        width: 100vw;
+        height: 27%;
+    }
+    
+    .item{
+        height: 100%;
+        width: 23%;
+        font-size: 2rem;
+        padding: 1%;
+    }
+    
+    .timer {
+        gap: 22px;
+    }
+    .text{
+        font-size: 4rem;
+        margin-top: 1%;
+        padding: 2%;
+
+    }
+    .timerScreen{
+        font-size: 11rem;
+        padding: 2%;
+    }
+    
+    .timerButtons{
+        width: 42%;
+        font-size: 4rem;
+        padding: 2%;
+    }
+
+
+}
+
+@media screen and (max-width: 620px) {
     
     html{
         height: 100vh;
+        font-size: 10px;
     }
 
+
     .heading{
+        font-size: 4rem;
         padding: 2%;
     }
-    .header{
-        height: 20vh;
+    .header {
+        height: 25vh;
+    }
+
+    .timer {
+        height: 52vh;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .text {
+        font-size: 4rem;
+        margin-top: 6%;
+        padding: 2%;
+    }
+
+    .timerScreen {
+        font-size: 11rem;
+        padding: 5%;
     }
 
     .timerButtons{
-        width: 50%;
-        height: 3.5rem;
+        font-size: 4.5rem;
+        width: 56%;
+        height: 16%;
     }
 
-    .buttons{
-        height: 2.5rem;
+    .buttons {
+        height: 35%;
     }
     .item{
+        display: flex;
         width: 20%;
-        height: 100%;
+        height: 83%;
         font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
     }
 }
 
