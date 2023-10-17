@@ -29,6 +29,12 @@ let tabChanged = false;
 utilsButton.addEventListener("click", (e) => {
   const element = e.target;
 
+  if(timerOn){
+    if(!confirm('This will reset current Timer !!')){
+      return;
+    }
+  }
+
   if (element.textContent === "Pomodoro" && pomoInitializer) {
     const ele = createTimerScreen("25:00", "Pomodoro Timer");
     const pomoEle = document.querySelector(".timer");
