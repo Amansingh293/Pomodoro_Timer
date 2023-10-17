@@ -26,6 +26,8 @@ let resume = false;
 
 let tabChanged = false;
 
+let titleDisplay = document.querySelector('title');
+
 utilsButton.addEventListener("click", (e) => {
   const element = e.target;
 
@@ -47,6 +49,7 @@ utilsButton.addEventListener("click", (e) => {
     resume = false;
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
+    titleDisplay.textContent = 'Pomodoro Timer';
     return;
   }
 
@@ -64,6 +67,7 @@ utilsButton.addEventListener("click", (e) => {
     resume = false;
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
+    titleDisplay.textContent = 'Pomodoro Timer';
     return;
   }
 
@@ -81,6 +85,7 @@ utilsButton.addEventListener("click", (e) => {
     fadeFn(element);
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
+    titleDisplay.textContent = 'Pomodoro Timer';
     return;
   }
 });
@@ -120,6 +125,7 @@ mainContainer.addEventListener("click", (e) => {
     tabChanged = false;
     pause = false;
     resume = false;
+    titleDisplay.textContent = 'Pomodoro Timer';
     return;
   }
 
@@ -152,7 +158,7 @@ mainContainer.addEventListener("click", (e) => {
     timerOn = false;
 
     const timerDisplay = document.querySelector(".timerScreen");
-
+    titleDisplay.textContent = 'Pomodoro Timer';
     if (!shortBreakCheck) {
       timerDisplay.textContent = "05:00";
     } else if (!longBreakCheck) {
@@ -192,24 +198,25 @@ function timerCounter(min, sec, element) {
     sec = sec - 1;
 
     element.textContent = `${min}:${sec}`;
-
+    titleDisplay.textContent = `${min}:${sec}`;
     if (min / 10 < 1) {
       element.textContent = `0${min}:${sec}`;
+      titleDisplay.textContent = `0${min}:${sec}`;
     }
 
     if (sec / 10 < 1) {
       element.textContent = `${min}:0${sec}`;
+      titleDisplay.textContent = `${min}:0${sec}`;
     }
 
     if (min / 10 < 1 && sec / 10 < 1) {
       element.textContent = `0${min}:0${sec}`;
+      titleDisplay.textContent = `0${min}:0${sec}`;
     }
     minutes = min;
     seconds = sec;
-    // //console.log( sec/10);
   }, 1000);
 
-  //console.log(intervalId);
 }
 
 function fadeFn(element) {
