@@ -29,10 +29,8 @@ let tabChanged = false;
 utilsButton.addEventListener("click", (e) => {
   const element = e.target;
 
-  if(timerOn){
-    if(!confirm('This will reset current Timer !!')){
-      return;
-    }
+  if(timerOn && !confirm('This will reset current Timer !!')){
+    return;
   }
 
   if (element.textContent === "Pomodoro" && pomoInitializer) {
