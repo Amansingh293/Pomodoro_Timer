@@ -24,10 +24,10 @@ let seconds = 0;
 
 let resume = false;
 
+let tabChanged = false;
+
 utilsButton.addEventListener("click", (e) => {
   const element = e.target;
-
-  console.log(element);
 
   if (element.textContent === "Pomodoro" && pomoInitializer) {
     const ele = createTimerScreen("25:00", "Pomodoro Timer");
@@ -38,7 +38,11 @@ utilsButton.addEventListener("click", (e) => {
     pomoInitializer = false;
     longBreakCheck = true;
     fadeFn(element);
-    console.log(element);
+    timerOn = false;
+    pause = false;
+    resume = false;
+    intervalId ? clearInterval(intervalId) : {};
+    tabChanged = true;
     return;
   }
 
@@ -51,8 +55,12 @@ utilsButton.addEventListener("click", (e) => {
     pomoInitializer = true;
     longBreakCheck = true;
     fadeFn(element);
-    
-    return
+    timerOn = false;
+    pause = false;
+    resume = false;
+    intervalId ? clearInterval(intervalId) : {};
+    tabChanged = true;
+    return;
   }
 
   if (element.textContent === "Long Break" && longBreakCheck) {
@@ -63,7 +71,12 @@ utilsButton.addEventListener("click", (e) => {
     shortBreakCheck = true;
     pomoInitializer = true;
     longBreakCheck = false;
+    timerOn = false;
+    pause = false;
+    resume = false;
     fadeFn(element);
+    intervalId ? clearInterval(intervalId) : {};
+    tabChanged = true;
     return;
   }
 });
@@ -71,20 +84,16 @@ utilsButton.addEventListener("click", (e) => {
 mainContainer.addEventListener("click", (e) => {
   const element = e.target;
 
-  console.log(intervalId);
-
-  // if(timerOn){
-  //     return;
-  // }
-
   if (element.classList.contains("fa-play")) {
     const timerScr = document.querySelector(".timerScreen");
 
+    const tab = document.querySelector('.timer').children[0];
+    
     if (resume) {
       timerCounter(0, 0, timerScr);
       pause = false;
-      fadeFn(element);
       resume = false;
+      fadeFn(element);
       return;
     }
 
@@ -104,14 +113,16 @@ mainContainer.addEventListener("click", (e) => {
     }
     timerOn = true;
     fadeFn(element);
+    tabChanged = false;
+    pause = false;
+    resume = false;
     return;
   }
 
   if (element.classList.contains("fa-pause")) {
-    if (pause === false && intervalId) {
+    if (pause === false && intervalId && !tabChanged) {
       clearInterval(intervalId);
       pause = true;
-      console.log("paused");
       resume = true;
       fadeFn(element);
       alert("Timer Paused");
@@ -153,6 +164,7 @@ mainContainer.addEventListener("click", (e) => {
 });
 
 function timerCounter(min, sec, element) {
+
   if (resume) {
     min = minutes;
     sec = seconds;
@@ -194,10 +206,10 @@ function timerCounter(min, sec, element) {
     }
     minutes = min;
     seconds = sec;
-    // console.log( sec/10);
+    // //console.log( sec/10);
   }, 1000);
 
-  console.log(intervalId);
+  //console.log(intervalId);
 }
 
 function fadeFn(element) {
