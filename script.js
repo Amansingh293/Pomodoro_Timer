@@ -87,8 +87,8 @@ mainContainer.addEventListener("click", (e) => {
   if (element.classList.contains("fa-play")) {
     const timerScr = document.querySelector(".timerScreen");
 
-    const tab = document.querySelector('.timer').children[0];
-    
+    const tab = document.querySelector(".timer").children[0];
+
     if (resume) {
       timerCounter(0, 0, timerScr);
       pause = false;
@@ -139,9 +139,6 @@ mainContainer.addEventListener("click", (e) => {
       return;
     }
     resume = false;
-    minutes = 0;
-    sec = 0;
-
     clearInterval(intervalId);
 
     fadeFn(element);
@@ -164,7 +161,6 @@ mainContainer.addEventListener("click", (e) => {
 });
 
 function timerCounter(min, sec, element) {
-
   if (resume) {
     min = minutes;
     sec = seconds;
