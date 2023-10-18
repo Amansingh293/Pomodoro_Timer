@@ -1,197 +1,371 @@
-
-*{
-    margin: 0;
-    box-sizing: border-box;
-    text-align: center;
-    font-weight: bold;
-    /* text-wrap:wrap; */
+:root {
+  --divBackGroundColor: rgb(39, 52, 48);
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: bold;
+  /* text-wrap:wrap; */
 }
 
-body{
-    background-color:	#5e0404;
-    color: white;
+body {
+  background-color: #740505;
+  color: white;
 }
-.header{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 20rem;
-    width: 100%;
-}
-
-.heading{
-    font-size: 5rem;
-    /* font-weight: 700; */
-    box-shadow: 2px 2px 2px 1px;
-    border: 1px solid rgb(135, 134, 134);
-    border-radius: 10px;
-    padding: 1%;
-    margin-bottom: 1%;
-    background-color: rgb(58, 1, 1);
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2%;
+  height: 22.5rem;
+  width: 100%;
+  gap: 6%;
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 80vw;
-    height: 27%;
+.heading {
+  font-size: 5rem;
+  /* font-weight: 700; */
+  box-shadow: 2px 2px 4px 1px black;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 1%;
+  background-color: rgb(39, 52, 48);
+}
+.createTask {
+  font-size: 2rem;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1%;
+  background-color: rgb(39, 52, 48);
+  border: 2.5px solid black;
+  border-radius: 10px;
+}
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  height: 30%;
 }
 
-.item{
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 100%;
+  width: 23%;
+  box-shadow: 2px 2px 2px 2px;
+  font-size: 2rem;
+}
+
+.main {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.text {
+  font-size: 3.5rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px;
+  padding: 1%;
+  background-color: #efeff3;
+  color: black;
+}
+.timerScreen {
+  font-size: 10rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px;
+  padding: 2%;
+  background-color: #efeff3;
+  color: black;
+}
+
+.timerButtons {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 4rem;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px;
+  padding: 1%;
+  background-color: #efeff3;
+  color: black;
+}
+
+.todoBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  width: 40%;
+  /* height: auto; */
+  border-left: 4px solid black;
+  /* flex-wrap: nowrap; */
+  overflow-y: auto;
+}
+
+.modalContainer {
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 56vh;
+  width: 54vw;
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  z-index: 2;
+  background-color: rgb(39, 52, 48);
+  border: 2.5px solid black;
+  border-radius: 10px;
+  font-size: 3rem;
+}
+.modalPriority {
+  width: 80%;
+  height: 10%;
+  border: 2.5px solid black;
+  border-radius: 10px;
+  font-size: 2rem;
+}
+.modalTask {
+  width: 80%;
+  height: 50%;
+  border: 2.5px solid black;
+  border-radius: 10px;
+  font-size: 2rem;
+}
+
+.modalButton {
+  height: 10%;
+  width: 30%;
+  border: 2.5px solid black;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 2rem;
+}
+
+.fa-plus {
+  border: 2px solid black;
+  padding: 2%;
+  border-radius: 10px;
+}
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+  background-color: rgb(45, 61, 56);
+  width: 50%;
+  border: 2px solid black;
+  border-radius: 10px;
+  gap: 4%;
+  padding: 2%;
+  color: black;
+}
+
+.priority {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    border: 1px solid black;
-    height: 100%;
-    width: 23%;
-    box-shadow: 2px 2px 2px 2px;
-    font-size: 2rem;
+  height: 20%;
+  width: 90%;
+  background-color: #efeff3;
+  font-size: 2rem;
+  border: 2.5px solid black;
+  border-radius: 10px;
 }
 
-.timer{
+.task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  height: 68%;
+  width: 90%;
+  background-color: #efeff3;
+  font-size: 1rem;
+  overflow: auto;
+  border: 2.5px solid black;
+  border-radius: 10px;
+}
+
+.checkBox {
+  display: flex;
+  gap: 15%;
+  align-self: flex-end;
+  height: 10%;
+  width: 50%;
+  font-size: 1.8rem;
+  justify-content: flex-end;
+  padding-top: 1%;
+}
+
+@media screen and (max-width: 920px) {
+  .header {
+    height: 24rem;
+    width: 100%;
+  }
+
+  .main{
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 80px;
+  }
+
+  .heading {
+    font-size: 5rem;
+    padding: 1%;
+    margin-bottom: 1%;
+  }
+
+  .createTask{
+    width: 60%;
+  }
+
+  .buttons {
+    width: 100vw;
+    height: 27%;
+  }
+
+  .item {
+    height: 100%;
+    width: 23%;
+    font-size: 2rem;
+    padding: 1%;
+  }
+
+  .modalContainer{
+    width: 90%;
+    height: 64%;
+    left: 5%;
+  }
+  .modalButton{
+    width: 60%;
+  }
+  
+  .timer {
+    gap: 22px;
+  }
+  .text {
+    font-size: 4rem;
+    margin-top: 1%;
+    padding: 2%;
+  }
+  .timerScreen {
+    font-size: 11rem;
+    padding: 2%;
+  }
+
+  .timerButtons {
+    width: 42%;
+    font-size: 4rem;
+    padding: 2%;
+  }
+
+  .todoBox{
+    margin-top: 5%;
+    border: 0;
+    width: 100%;
+    margin-bottom: 2%;
+  }
+
+  .taskContainer{
+    width: 54%;
+    height: 22rem;
+  }
+
+  .priority{
+    font-size: 2.5rem;
+  }
+  .task{
+    font-size: 1.7rem;
+  }
+  .checkBox{
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  html {
+    height: 100vh;
+    font-size: 10px;
+  }
+
+  .heading {
+    font-size: 4rem;
+    padding: 2%;
+  }
+  .header {
+    height: 22rem;
+  }
+
+  .timer {
+    height: 48vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 40px;
-}
+  }
 
-.text{
+  .createTask{
+    width: 60%;
+  }
+  .text {
     font-size: 4rem;
-    border: 2px solid black;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px;
-    padding: 1%;
-    background-color: #efeff3;
-    color: black;
-}
-.timerScreen{
-    font-size: 10rem;
-    border: 2px solid black;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px;
+    margin-top: 6%;
     padding: 2%;
-    background-color: #efeff3;
-    color: black;
-}
+  }
 
-.timerButtons{
-    width: 22%;
-    display:flex;
-    justify-content: space-evenly;
-    font-size: 4rem;
+  .timerScreen {
+    font-size: 11rem;
+    padding: 5%;
+  }
+
+  .main{
+    gap: 55px;
+  }
+  .timerButtons {
+    font-size: 4.5rem;
+    width: 56%;
+    height: 16%;
+  }
+
+  .buttons {
+    height: 35%;
+  }
+  .item {
+    display: flex;
+    width: 20%;
+    height: 83%;
+    font-weight: bold;
+    justify-content: center;
     align-items: center;
-    border: 2px solid black;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px;
-    padding: 1%;
-    background-color: #efeff3;
-    color: black;
+    font-size: 1.1rem;
+  }
+  .taskContainer{
+    /* font-size: 3rem; */
+    width: 65%;
+    height: 22rem;
+  }
 }
-
-@media screen and (max-width: 800px) {
-
-    .header{
-        height: 20rem;
-        width: 100%;
-    }
-    
-    .heading{
-        font-size: 5rem;
-        padding: 1%;
-        margin-bottom: 1%;
-    }
-    
-    .buttons{
-        width: 100vw;
-        height: 27%;
-    }
-    
-    .item{
-        height: 100%;
-        width: 23%;
-        font-size: 2rem;
-        padding: 1%;
-    }
-    
-    .timer {
-        gap: 22px;
-    }
-    .text{
-        font-size: 4rem;
-        margin-top: 1%;
-        padding: 2%;
-
-    }
-    .timerScreen{
-        font-size: 11rem;
-        padding: 2%;
-    }
-    
-    .timerButtons{
-        width: 42%;
-        font-size: 4rem;
-        padding: 2%;
-    }
-
-
-}
-
-@media screen and (max-width: 620px) {
-    
-    html{
-        height: 100vh;
-        font-size: 10px;
-    }
-
-
-    .heading{
-        font-size: 4rem;
-        padding: 2%;
-    }
-    .header {
-        height: 25vh;
-    }
-
-    .timer {
-        height: 48vh;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .text {
-        font-size: 4rem;
-        margin-top: 6%;
-        padding: 2%;
-    }
-
-    .timerScreen {
-        font-size: 11rem;
-        padding: 5%;
-    }
-
-    .timerButtons{
-        font-size: 4.5rem;
-        width: 56%;
-        height: 16%;
-    }
-
-    .buttons {
-        height: 35%;
-    }
-    .item{
-        display: flex;
-        width: 20%;
-        height: 83%;
-        font-weight: bold;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.1rem;
-    }
-}
-
-

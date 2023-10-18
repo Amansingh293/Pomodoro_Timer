@@ -1,6 +1,12 @@
 const mainContainer = document.querySelector(".main");
 
-const utilsButton = document.querySelector(".buttons");
+const headerSection = document.querySelector(".header");
+
+const modalContainer = document.querySelector(".modalContainer");
+
+const modalPriority = document.querySelector(".modalPriority");
+
+const modaltask = document.querySelector(".modalPriority");
 
 let pomoInitializer = true;
 
@@ -26,12 +32,20 @@ let resume = false;
 
 let tabChanged = false;
 
-let titleDisplay = document.querySelector('title');
+let titleDisplay = document.querySelector("title");
 
-utilsButton.addEventListener("click", (e) => {
+let todoDiv;
+
+let todoAppended = false;
+
+
+// event listeners
+
+headerSection.addEventListener("click", (e) => {
+
   const element = e.target;
 
-  if(timerOn && !confirm('This will reset current Timer !!')){
+  if (timerOn && !confirm("This will reset current Timer !!")) {
     return;
   }
 
@@ -39,7 +53,9 @@ utilsButton.addEventListener("click", (e) => {
     const ele = createTimerScreen("25:00", "Pomodoro Timer");
     const pomoEle = document.querySelector(".timer");
     pomoEle ? pomoEle.remove() : {};
-    mainContainer.appendChild(ele);
+    todoDiv
+      ? mainContainer.insertBefore(ele, todoDiv)
+      : mainContainer.appendChild(ele);
     shortBreakCheck = true;
     pomoInitializer = false;
     longBreakCheck = true;
@@ -49,7 +65,8 @@ utilsButton.addEventListener("click", (e) => {
     resume = false;
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
-    titleDisplay.textContent = 'Pomodoro Timer';
+    titleDisplay.textContent = "Pomodoro Timer";
+    todoAppendor();
     return;
   }
 
@@ -57,7 +74,10 @@ utilsButton.addEventListener("click", (e) => {
     const sB = createTimerScreen("05:00", "Short Break");
     const pomoEle = document.querySelector(".timer");
     pomoEle ? pomoEle.remove() : {};
-    mainContainer.appendChild(sB);
+    console.log(sB);
+    todoDiv
+      ? mainContainer.insertBefore(sB, todoDiv)
+      : mainContainer.appendChild(sB);
     shortBreakCheck = false;
     pomoInitializer = true;
     longBreakCheck = true;
@@ -67,7 +87,9 @@ utilsButton.addEventListener("click", (e) => {
     resume = false;
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
-    titleDisplay.textContent = 'Short Break';
+    titleDisplay.textContent = "Short Break";
+    todoAppendor();
+    console.log(element);
     return;
   }
 
@@ -75,7 +97,9 @@ utilsButton.addEventListener("click", (e) => {
     const sB = createTimerScreen("10:00", "Long Break");
     const pomoEle = document.querySelector(".timer");
     pomoEle ? pomoEle.remove() : {};
-    mainContainer.appendChild(sB);
+    todoDiv
+      ? mainContainer.insertBefore(sB, todoDiv)
+      : mainContainer.appendChild(sB);
     shortBreakCheck = true;
     pomoInitializer = true;
     longBreakCheck = false;
@@ -85,7 +109,16 @@ utilsButton.addEventListener("click", (e) => {
     fadeFn(element);
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
-    titleDisplay.textContent = 'Long Break';
+    titleDisplay.textContent = "Long Break";
+    todoAppendor();
+    return;
+  }
+  if( element.classList.contains('fa-plus')){
+    if(!todoAppended){
+      alert("Select Timer First");
+      return;
+    }
+    modalContainer.style.display = 'flex';
     return;
   }
 });
@@ -95,8 +128,6 @@ mainContainer.addEventListener("click", (e) => {
 
   if (element.classList.contains("fa-play")) {
     const timerScr = document.querySelector(".timerScreen");
-
-    const tab = document.querySelector(".timer").children[0];
 
     if (resume) {
       timerCounter(0, 0, timerScr);
@@ -125,7 +156,7 @@ mainContainer.addEventListener("click", (e) => {
     tabChanged = false;
     pause = false;
     resume = false;
-    titleDisplay.textContent = 'Pomodoro Timer';
+    titleDisplay.textContent = "Pomodoro Timer";
     return;
   }
 
@@ -158,7 +189,9 @@ mainContainer.addEventListener("click", (e) => {
     timerOn = false;
 
     const timerDisplay = document.querySelector(".timerScreen");
-    titleDisplay.textContent = 'Pomodoro Timer';
+
+    titleDisplay.textContent = "Pomodoro Timer";
+
     if (!shortBreakCheck) {
       timerDisplay.textContent = "05:00";
     } else if (!longBreakCheck) {
@@ -166,9 +199,26 @@ mainContainer.addEventListener("click", (e) => {
     } else if (!pomoInitializer) {
       timerDisplay.textContent = "25:00";
     }
+
     return;
   }
 });
+
+
+modalContainer.addEventListener("click", (e) => {
+  const element = e.target;
+  if (element.classList.contains("modalButton")) {
+    const taskBox = taskCreator(modalPriority.value, modaltask.value);
+    todoDiv.append(taskBox);
+    modalContainer.style.display = "none";
+  }
+  return;
+});
+
+
+
+//  Function section //
+
 
 function timerCounter(min, sec, element) {
   if (resume) {
@@ -216,7 +266,63 @@ function timerCounter(min, sec, element) {
     minutes = min;
     seconds = sec;
   }, 1000);
+}
 
+function taskCreator(priority, task) {
+  if (!todoAppended) {
+    return;
+  }
+
+  const taskPriority = createElement("div", {
+    className: "priority",
+    textContent: priority,
+  });
+
+  const currentTask = createElement("textArea", {
+    className: "task",
+    textContent: task,
+  });
+
+  const checkBox = createElement("i", { className: "fa-regular fa-square" });
+
+  const trash = createElement("i", { className: "fa-solid fa-trash" });
+
+  const checkBoxContainer = createElement(
+    "div",
+    { className: "checkBox" },
+    checkBox,
+    trash
+  );
+
+  const taskContainer = createElement(
+    "div",
+    { className: "taskContainer" },
+    taskPriority,
+    currentTask,
+    checkBoxContainer
+  );
+
+  return taskContainer;
+}
+
+function todoAppendor() {
+  if (todoAppended) {
+    return;
+  }
+
+  todoDiv = createElement("div", { className: "todoBox" });
+
+  todoAppended = true;
+
+  mainContainer.appendChild(todoDiv);
+
+  todoDiv.addEventListener("click", (e) => {
+    const element = e.target;
+
+    if (element.classList.contains("fa-plus")) {
+      modalContainer.style.display = "flex";
+    }
+  });
 }
 
 function fadeFn(element) {
@@ -239,7 +345,7 @@ function createElement(elementType = "div", properties, ...children) {
 function createTimerScreen(timer, task) {
   const text = createElement("div", {
     className: "text",
-    textContent: `${task}`,
+    textContent: task,
   });
 
   const screen = createElement("div", {
