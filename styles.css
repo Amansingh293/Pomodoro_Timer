@@ -156,7 +156,7 @@ body{
     }
 
     .timer {
-        height: 52vh;
+        height: 48vh;
         display: flex;
         align-items: center;
         flex-direction: column;
