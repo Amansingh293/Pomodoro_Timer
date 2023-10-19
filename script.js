@@ -4,10 +4,6 @@ const headerSection = document.querySelector(".header");
 
 const modalContainer = document.querySelector(".modalContainer");
 
-const modalPriority = document.querySelector(".modalPriority");
-
-const modaltask = document.querySelector(".modalPriority");
-
 let pomoInitializer = true;
 
 let shortBreakCheck = true;
@@ -202,16 +198,64 @@ mainContainer.addEventListener("click", (e) => {
 
     return;
   }
+
+  if(element.classList[1] === ('fa-square')){
+    
+    const parent = element.parentElement;
+
+    const trash = parent.children[1];
+    
+    const tick = createElement('i' , {className : 'fa-solid fa-square-check'});
+
+    parent.insertBefore(tick , trash);
+
+    element.remove();
+
+    const grandParent = parent.parentElement;
+
+    alert(`${grandParent.children[0].textContent} is Done !!`);
+
+    return;
+  }
+
+  if(element.classList.contains('fa-square-check')){
+    alert('This task is already Done !!');
+    return;
+  }
+
+  if(element.classList.contains('fa-trash')){
+    
+    const taskName = element.parentElement.parentElement.children[0].textContent;
+
+    const currentElement = element.parentElement.parentElement;
+
+    confirm(`Do you want to delete ${taskName} ?`) ?  currentElement.remove() : {};
+    return;
+  }
 });
 
 
 modalContainer.addEventListener("click", (e) => {
   const element = e.target;
+
+  let taskName = element.parentElement.children[0];
+
+  let taskText = element.parentElement.children[1];
+  
   if (element.classList.contains("modalButton")) {
-    const taskBox = taskCreator(modalPriority.value, modaltask.value);
+
+    if( taskName.value === '' || taskText.value === ''){
+      modalContainer.style.display = "none";
+      return;
+    }
+
+    const taskBox = taskCreator(taskName.value, taskText.value);
     todoDiv.append(taskBox);
     modalContainer.style.display = "none";
+    taskName.value = '';
+    taskText.value = '';
   }
+   
   return;
 });
 
@@ -289,7 +333,7 @@ function taskCreator(priority, task) {
 
   const checkBoxContainer = createElement(
     "div",
-    { className: "checkBox" },
+    { className: "checkBoxContainer" },
     checkBox,
     trash
   );
