@@ -4,6 +4,8 @@ const headerSection = document.querySelector(".header");
 
 const modalContainer = document.querySelector(".modalContainer");
 
+const body = document.querySelector('body');
+
 const uid = new ShortUniqueId({ length: 6 });
 
 let pomoInitializer = true;
@@ -40,9 +42,11 @@ let taskArray = [];
 
 let taskRestored = false;
 
-// event listeners
+
+//***************************  event listeners ***************************//
 
 headerSection.addEventListener("click", (e) => {
+
   const element = e.target;
 
   if (timerOn && !confirm("This will reset current Timer !!")) {
@@ -66,8 +70,8 @@ headerSection.addEventListener("click", (e) => {
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
     titleDisplay.textContent = "Pomodoro Timer";
-    todoAppendor();
-    taskRestorer();
+    !todoAppended ? todoAppendor() : {};
+    !taskRestored ? taskRestorer() : {};
     return;
   }
 
@@ -89,8 +93,8 @@ headerSection.addEventListener("click", (e) => {
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
     titleDisplay.textContent = "Short Break";
-    todoAppendor();
-    taskRestorer();
+    !todoAppended ? todoAppendor() : {};
+    !taskRestored ? taskRestorer() : {};
     return;
   }
 
@@ -111,13 +115,13 @@ headerSection.addEventListener("click", (e) => {
     intervalId ? clearInterval(intervalId) : {};
     tabChanged = true;
     titleDisplay.textContent = "Long Break";
-    todoAppendor();
-    taskRestorer();
+    !todoAppended ? todoAppendor() : {};
+    !taskRestored ? taskRestorer() : {};
     return;
   }
   if (element.classList.contains("fa-plus")) {
-    if (!todoAppended) {
-      alert("Select Timer First");
+    if (!todoAppended && pomoInitializer && shortBreakCheck && longBreakCheck) {
+      showToast("Select Timer First");
       return;
     }
     modalContainer.style.display = "flex";
@@ -170,7 +174,7 @@ mainContainer.addEventListener("click", (e) => {
       pause = true;
       resume = true;
       fadeFn(element);
-      alert("Timer Paused");
+      showToast("Timer Paused");
     }
   }
 
@@ -222,13 +226,13 @@ mainContainer.addEventListener("click", (e) => {
 
     const grandParent = parent.parentElement;
 
-    alert(`${grandParent.children[1].textContent} is Done !!`);
+    showToast(`${grandParent.children[1].textContent} is Done !!`);
 
     return;
   }
 
   if (element.classList.contains("fa-square-check")) {
-    alert("This task is already Done !!");
+    showToast("This task is already Done !!");
     return;
   }
 
@@ -243,11 +247,15 @@ mainContainer.addEventListener("click", (e) => {
       ? currentElement.remove()
       : {};
     
-      taskDelete(id);
+    taskDelete(id);
 
+    
     if (todoDiv.children.length === 0) {
       todoDiv.style.display = "none";
       headerSection.style.borderBottom = "";
+      todoDiv.remove();
+      todoAppended = false;
+      todoDiv = null;
     }
 
     return;
@@ -269,7 +277,11 @@ modalContainer.addEventListener("click", (e) => {
     }
 
     const taskBox = taskCreator(undefined, taskName.value, taskText.value);
+
+    (!todoDiv) ? todoAppendor() :  {};
+    
     todoDiv.append(taskBox);
+    
     modalContainer.style.display = "none";
     todoDiv.style.display = "flex";
     headerSection.style.borderBottom = "2.5px solid black";
@@ -279,7 +291,8 @@ modalContainer.addEventListener("click", (e) => {
   return;
 });
 
-//  Function section //
+
+//***************************  Function section ***************************//
 
 
 function timerCounter(min, sec, element) {
@@ -298,7 +311,7 @@ function timerCounter(min, sec, element) {
   intervalId = setInterval(() => {
     if (min === 0 && sec === 0) {
       clearInterval(intervalId);
-      alert("timer over");
+      showToast("timer over");
       return;
     }
 
@@ -329,58 +342,6 @@ function timerCounter(min, sec, element) {
     seconds = sec;
   }, 1000);
 }
-
-
-
-function CopytimerCounter(min, sec, element) {
-  if (resume) {
-    min = minutes;
-    sec = seconds;
-  } else {
-    min = +min;
-    sec = +sec;
-  }
-
-  if (!resume && !confirm("Start Timer Right Now ?")) {
-    return;
-  }
-
-  intervalId = setInterval(() => {
-    if (min === 0 && sec === 0) {
-      clearInterval(intervalId);
-      alert("timer over");
-      return;
-    }
-
-    if (sec === 0) {
-      sec = 60;
-      min -= 1;
-    }
-
-    sec = sec - 1;
-
-    element.textContent = `${min}:${sec}`;
-    titleDisplay.textContent = `${min}:${sec}`;
-    if (min / 10 < 1) {
-      element.textContent = `0${min}:${sec}`;
-      titleDisplay.textContent = `0${min}:${sec}`;
-    }
-
-    if (sec / 10 < 1) {
-      element.textContent = `${min}:0${sec}`;
-      titleDisplay.textContent = `${min}:0${sec}`;
-    }
-
-    if (min / 10 < 1 && sec / 10 < 1) {
-      element.textContent = `0${min}:0${sec}`;
-      titleDisplay.textContent = `0${min}:0${sec}`;
-    }
-    minutes = min;
-    seconds = sec;
-  }, 1000);
-}
-
-
 
 function taskDelete(id) {
   let index = 0;
@@ -396,14 +357,12 @@ function taskDelete(id) {
   return;
 }
 
-
-
 function taskRestorer() {
-  if (localStorage.getItem("taskData") !== null && !taskRestored) {
-    let data = localStorage.getItem("taskData");
+
+  let data = localStorage.getItem("taskData");
+
+  if (data !== null && !taskRestored && data.length !== 0) {
     taskArray = JSON.parse(data);
-    //console.log(taskArray);
-    todoAppendor();
     todoDiv.style.display = "flex";
 
     for (let i = 0; i < taskArray.length; i++) {
@@ -412,7 +371,6 @@ function taskRestorer() {
         taskArray[i].taskPriority,
         taskArray[i].taskContent
       );
-      //console.log(element);
       todoDiv.appendChild(element);
     }
     taskRestored = true;
@@ -475,22 +433,9 @@ function taskCreator(uId, priority, task) {
 }
 
 function todoAppendor() {
-  if (todoAppended) {
-    return;
-  }
-
   todoDiv = createElement("div", { className: "todoBox" });
   todoAppended = true;
-
   mainContainer.appendChild(todoDiv);
-
-  todoDiv.addEventListener("click", (e) => {
-    const element = e.target;
-
-    if (element.classList.contains("fa-plus")) {
-      modalContainer.style.display = "flex";
-    }
-  });
 }
 
 function fadeFn(element) {
@@ -548,9 +493,55 @@ function createTimerScreen(timer, task) {
   return timerComp;
 }
 
+function customConfirm(content){
+  
+  const textOfConfirm = createElement('div' , {className : "textOfConfirm" , textContent : content});
+
+  const confirmBtn = createElement('button' , {className : 'confirmButtons',textContent : 'Yes'});
+
+  const cancelBtn = createElement('button' , {className : 'confirmButtons', textContent : 'No'});
+
+  const confirmButtons = createElement('div' , { className : 'confirmButtonsBox'} , confirmBtn,cancelBtn);
+
+  const element = createElement('div' , {className : 'customConfirm'} , textOfConfirm , confirmButtons)
+
+  body.appendChild(element);
+
+  confirmButtons.addEventListener('click' , (e)=>{
+
+    const selected = e.target;
+
+    if( selected.textContent === 'Yes' ){
+      return true;
+    }
+
+    if( selected.textContent === 'No'){
+      return false;
+    }
+  })
+  console.log(element);
+
+  return;
+}
+
+function showToast(content){
+  const element = createElement('div' , {className : 'toast' , textContent : content});
+  element.classList.add("taostShow");
+  body.appendChild(element);
+  setTimeout(()=>{
+    element.classList.remove('taostShow');
+  }, 800);
+}
+
 function setLocalStorage() {
+
   let data = JSON.stringify(taskArray);
-  //console.log(data);
+
+  if(taskArray.length === 0){
+    localStorage.removeItem('taskData');
+    return;
+  }
+
   localStorage.setItem("taskData", data);
   return;
 }
