@@ -493,36 +493,36 @@ function createTimerScreen(timer, task) {
   return timerComp;
 }
 
-function customConfirm(content){
+// function customConfirm(content){
   
-  const textOfConfirm = createElement('div' , {className : "textOfConfirm" , textContent : content});
+//   const textOfConfirm = createElement('div' , {className : "textOfConfirm" , textContent : content});
 
-  const confirmBtn = createElement('button' , {className : 'confirmButtons',textContent : 'Yes'});
+//   const confirmBtn = createElement('button' , {className : 'confirmButtons',textContent : 'Yes'});
 
-  const cancelBtn = createElement('button' , {className : 'confirmButtons', textContent : 'No'});
+//   const cancelBtn = createElement('button' , {className : 'confirmButtons', textContent : 'No'});
 
-  const confirmButtons = createElement('div' , { className : 'confirmButtonsBox'} , confirmBtn,cancelBtn);
+//   const confirmButtons = createElement('div' , { className : 'confirmButtonsBox'} , confirmBtn,cancelBtn);
 
-  const element = createElement('div' , {className : 'customConfirm'} , textOfConfirm , confirmButtons)
+//   const element = createElement('div' , {className : 'customConfirm'} , textOfConfirm , confirmButtons)
 
-  body.appendChild(element);
+//   body.appendChild(element);
 
-  confirmButtons.addEventListener('click' , (e)=>{
+//   confirmButtons.addEventListener('click' , (e)=>{
 
-    const selected = e.target;
+//     const selected = e.target;
 
-    if( selected.textContent === 'Yes' ){
-      return true;
-    }
+//     if( selected.textContent === 'Yes' ){
+//       return true;
+//     }
 
-    if( selected.textContent === 'No'){
-      return false;
-    }
-  })
-  console.log(element);
+//     if( selected.textContent === 'No'){
+//       return false;
+//     }
+//   })
+//   console.log(element);
 
-  return;
-}
+//   return;
+// }
 
 function showToast(content){
   const element = createElement('div' , {className : 'toast' , textContent : content});
