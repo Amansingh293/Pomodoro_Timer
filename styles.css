@@ -1,5 +1,5 @@
 :root {
-  --divBackGroundColor: rgb(39, 52, 48);
+  --divBackGroundColor: #191919;
 }
 * {
   margin: 0;
@@ -10,7 +10,7 @@
 }
 
 body {
-  background-color: #990000ea;
+  background-color: #fefcfb;
   color: white;
 }
 
@@ -28,7 +28,7 @@ body {
   left: 25%;
   right: 25%;
   font-weight: bolder;
-  background-color: #ffd6d6;
+  background-color: #fffdfd;
   color: #000000;
   padding: 20px;
   border-radius: 5px;
@@ -57,16 +57,17 @@ body {
   border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
   padding: 0.5%;
-  background-color: rgb(39, 52, 48);
+  background-color: var(--divBackGroundColor);
 }
 .createTask {
   font-size: 2rem;
-  width: 20%;
+  height: 100%;
+  width: 28%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0.5%;
-  background-color: rgb(39, 52, 48);
+  background-color: #004344;
   border: 2.5px solid black;
   border-radius: 10px;
   box-shadow: 2px 2px 4px 1px black;
@@ -75,8 +76,9 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 70%;
+  width: 80%;
   height: 30%;
+  gap: 4%;
   
 }
 
@@ -120,8 +122,8 @@ body {
   border-radius: 10px;
   box-shadow: 2px 2px 4px 2px;
   padding: 2%;
-  background-color: #efeff3;
-  color: black;
+  background-color: var(--divBackGroundColor);
+  /* color: black; */
 }
 
 .timerScreen {
@@ -129,9 +131,9 @@ body {
   border: 2px solid black;
   border-radius: 10px;
   box-shadow: 2px 2px 4px 2px;
-  padding: 2%;
-  background-color: #efeff3;
-  color: black;
+  padding: 4%;
+  background-color: var(--divBackGroundColor);
+  /* color: black; */
 }
 
 .timerButtons {
@@ -144,8 +146,8 @@ body {
   border-radius: 10px;
   box-shadow: 2px 2px 4px 2px;
   padding: 1%;
-  background-color: #efeff3;
-  color: black;
+  background-color: var(--divBackGroundColor);
+  /* color: black; */
 }
 
 .todoBox {
@@ -171,7 +173,7 @@ body {
   left: 25%;
   right: 25%;
   z-index: 2;
-  background-color: rgb(39, 52, 48);
+  background-color: var(--divBackGroundColor);
   border: 2.5px solid black;
   border-radius: 10px;
   font-size: 3rem;
@@ -211,7 +213,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 20rem;
-  background-color: rgb(45, 61, 56);
+  background-color: var(--divBackGroundColor);
   width: 50%;
   border: 2px solid black;
   border-radius: 10px;
@@ -231,6 +233,8 @@ body {
   border: 2.5px solid black;
   border-radius: 10px;
 }
+
+
 
 .task {
   display: flex;
@@ -299,6 +303,14 @@ body {
   border-radius: 10px;
   border: 2px solid black;
   font-size: 1.4rem;
+}
+
+.fa-solid:hover{
+  cursor: pointer;
+}
+
+.checkBoxContainer:hover{
+  cursor: pointer;
 }
 
 @media screen and (max-width: 920px) {
